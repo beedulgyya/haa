@@ -2,7 +2,423 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="불특정 대중에게 공개하는 개인 한 페이지">
+<title>나를 보여주는 한 페이지</title>
+<style>
+:root{--bg:#0c1712;--surface:#13221a;--surface2:#0f1b14;--text:#f2f7f3;--muted:#afc0b4;--line:#30463a;--accent:#9be28f;--danger:#f0a29a;--max:1120px}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;line-height:1.6;overflow-x:hidden}
+body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+a{color:inherit} button{font:inherit}:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.skip{position:fixed;left:12px;top:-60px;z-index:100;padding:10px 14px;background:#fff;color:#000}.skip:focus{top:12px}
+.container{width:min(var(--max),calc(100% - 40px));margin-inline:auto}
+header{position:sticky;top:0;z-index:50;background:rgba(11,15,20,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+nav{min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-weight:850;letter-spacing:.08em;text-decoration:none}.nav-links{display:flex;gap:18px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+.nav-links a{color:#aeb8c2;text-decoration:none;font-size:14px}.nav-links a:hover{color:#fff}
+section{padding:76px 0;border-top:1px solid #202a33}.hero{min-height:calc(100svh - 66px);display:grid;align-items:center;border-top:0;padding:42px 0 56px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:42px;align-items:center}.eyebrow{color:var(--accent);font-size:12px;font-weight:850;letter-spacing:.16em}
+h1{font-size:clamp(44px,6.4vw,78px);line-height:1.02;letter-spacing:-.055em;margin:12px 0 18px} h1 span{color:var(--accent)}
+.lead{max-width:680px;color:#c1cbd4;font-size:17px;margin:0}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 16px;border:1px solid #3a4652;border-radius:8px;background:#111820;text-decoration:none;font-weight:750}.button.primary{background:#f4f7fa;color:#0b0f14}
+.section-title{font-size:33px;line-height:1.15;letter-spacing:-.035em;margin:7px 0 10px}.section-desc{margin:0 0 28px;color:#95a2ae}
+.proof{display:grid;gap:12px}.card,.scope-card,.project,.submission,.check{background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.proof-card{padding:19px}.proof-card h2{font-size:18px;margin:4px 0}.proof-card p{margin:0;color:#9eabb7;font-size:14px}
+.scope-statement{padding:19px;border-left:3px solid var(--accent);background:var(--surface);margin-bottom:18px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.scope-card,.project,.submission,.check{padding:22px}.scope-card h3,.project h3,.submission h3,.check h3{margin-top:0}.scope-card ul,.submission ul,.submission ol,.check ul{color:#aeb9c3}.public{border-top:3px solid var(--accent)}.private{border-top:3px solid var(--danger)}
+.experience-list{display:grid;gap:14px}.card{overflow:hidden}
+.toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px;border:0;background:transparent;color:#fff;text-align:left;cursor:pointer}.toggle:hover{background:#151e27}
+.toggle-label{display:flex;align-items:center;gap:12px}.num{color:var(--accent);font-size:12px;font-weight:850}.content{border-top:1px solid var(--line);padding:0 20px 21px}.content[hidden]{display:none}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:18px}.box{padding:17px;background:var(--surface2);border:1px solid #26313b;border-radius:8px}
+.box strong{display:block;color:var(--accent);font-size:12px;letter-spacing:.06em}.box p{margin:6px 0 0;color:#aeb8c2;font-size:14px}
+.evidence{margin-top:13px;padding:14px;background:#151e27;border-radius:8px;color:#b8c3cc;font-size:14px}
+.projects,.submission-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.tags{display:flex;flex-wrap:wrap;gap:7px}.tag{font-size:12px;color:#aeb9c3;border:1px solid #34404b;border-radius:999px;padding:3px 9px}
+.process{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.process .project{padding:19px}.process .project p{margin:0;color:#aeb9c3;font-size:14px}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:15px}.check li{margin:6px 0}
+.code-like{margin:0;padding:15px;background:#070a0d;border-radius:8px;color:#b8c3cc;font:12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap}
+.motion{margin-top:18px;padding:19px;background:var(--surface);border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.motion p{margin:0;color:#aeb9c3;font-size:14px}.motion button{padding:10px 14px;border:1px solid #3a4652;border-radius:8px;background:#18212a;color:#fff;cursor:pointer}
+footer{padding:30px 0;border-top:1px solid #202a33;color:#6f7b87;font-size:12px}
+@media(max-width:760px){.container{width:calc(100% - 24px)}nav{padding:11px 0;flex-direction:column}.nav-links{justify-content:center;gap:11px}.hero{min-height:auto;padding:45px 0 60px}.hero-grid,.two-col,.projects,.submission-grid,.checks{grid-template-columns:1fr}.process{grid-template-columns:1fr 1fr}.three{grid-template-columns:1fr}section{padding:64px 0}h1{font-size:49px;letter-spacing:-.045em}.motion{flex-direction:column;align-items:stretch}.motion button{width:100%}}
+@media(max-width:390px){.process{grid-template-columns:1fr}.nav-links{font-size:13px}}
+
+/* ===== subtle motion ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero > .container > .hero-grid > div:first-child {
+  animation: fadeUp 0.7s ease-out both;
+}
+
+.proof-card:nth-child(1) { animation: fadeUp 0.65s 0.08s ease-out both; }
+.proof-card:nth-child(2) { animation: fadeUp 0.65s 0.18s ease-out both; }
+.proof-card:nth-child(3) { animation: fadeUp 0.65s 0.28s ease-out both; }
+
+.scope-card, .project, .submission, .check {
+  transition: transform 0.22s ease, border-color 0.22s ease, background-color 0.22s ease;
+}
+
+.scope-card:hover, .project:hover, .submission:hover, .check:hover {
+  transform: translateY(-3px);
+  border-color: #45606f;
+}
+
+.button {
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.button:hover { transform: translateY(-2px); }
+
+.toggle span[aria-hidden="true"] {
+  transition: transform 0.2s ease;
+}
+
+.toggle[aria-expanded="true"] span[aria-hidden="true"] {
+  transform: rotate(90deg);
+}
+
+.reveal-target {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.reveal-target.reveal-in {
+  animation: fadeUp 0.55s ease-out both;
+}
+
+body.reduce-motion .reveal-target {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+body {
+  background:
+    radial-gradient(circle at 15% 10%, rgba(155,226,143,.12), transparent 28%),
+    radial-gradient(circle at 85% 30%, rgba(89,164,98,.10), transparent 30%),
+    linear-gradient(180deg, #0b1610 0%, #0d1a13 24%, #112018 52%, #14251b 78%, #0b1711 100%);
+  background-attachment: fixed;
+}
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:var(--nature-glow,.35);
+  background:
+    radial-gradient(circle at 78% 16%, rgba(164,235,148,.14), transparent 22%),
+    radial-gradient(circle at 24% 72%, rgba(75,141,84,.12), transparent 25%);
+  transition:opacity .35s ease;
+}
+body.nature-deep {
+  --nature-glow:.62;
+  --bg:#08140d;
+  --surface:#112219;
+  --surface2:#0d1a13;
+}
+body.nature-light {
+  --nature-glow:.82;
+  --bg:#102116;
+  --surface:#173022;
+  --surface2:#12251a;
+}
+.nature-badge {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin:0 0 14px;
+  padding:6px 10px;
+  border:1px solid rgba(155,226,143,.28);
+  border-radius:999px;
+  background:rgba(155,226,143,.08);
+  color:#b7e9ae;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.nature-badge::before { content:"●"; color:#9be28f; font-size:9px; }
+.nature-note { margin-top:12px; color:#9eb6a3; font-size:13px; }
+.proof-card,.scope-card,.project,.submission,.check { box-shadow:0 8px 24px rgba(0,0,0,.10); }
+@media (prefers-reduced-motion: reduce) { body::before { transition:none; } }
+
+
+/* ===== section-by-section nature atmosphere ===== */
+html {
+  --page-hue: 128deg;
+  --page-light: 0.25;
+}
+
+body {
+  transition: background-color .7s ease, color .5s ease;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: .9;
+  background:
+    radial-gradient(circle at 18% calc(20% + var(--scroll-shift, 0px)), rgba(184, 239, 165, .08), transparent 22%),
+    radial-gradient(circle at 82% calc(65% + var(--scroll-shift, 0px)), rgba(97, 170, 105, .08), transparent 25%);
+  transition: opacity .7s ease;
+}
+
+.scene {
+  position: relative;
+  overflow: hidden;
+}
+
+.scene::before,
+.scene::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(10px);
+  opacity: 0;
+  transition: opacity .9s ease, transform 1s ease, background-color .9s ease;
+}
+
+.scene::before {
+  width: 280px;
+  height: 280px;
+  right: -100px;
+  top: 10%;
+}
+
+.scene::after {
+  width: 220px;
+  height: 220px;
+  left: -90px;
+  bottom: 6%;
+}
+
+/* Sprout: fresh green */
+.scene-sprout {
+  background:
+    linear-gradient(180deg, rgba(20, 58, 32, .24), rgba(10, 24, 15, .08));
+}
+.scene-sprout::before {
+  opacity: .75;
+  background: rgba(168, 239, 145, .10);
+}
+.scene-sprout::after {
+  opacity: .42;
+  background: rgba(70, 150, 88, .10);
+}
+
+/* Forest: calm and grounded */
+.scene-forest {
+  background:
+    linear-gradient(180deg, rgba(19, 68, 39, .12), rgba(25, 47, 32, .20));
+}
+.scene-forest::before {
+  opacity: .48;
+  background: rgba(78, 164, 95, .12);
+  transform: translateY(12px);
+}
+
+/* Breeze: lighter green */
+.scene-breeze {
+  background:
+    linear-gradient(180deg, rgba(43, 84, 57, .18), rgba(18, 42, 26, .10));
+}
+.scene-breeze::after {
+  opacity: .58;
+  background: rgba(140, 221, 161, .11);
+  transform: translateY(-10px);
+}
+
+/* Sunlight: warm green with light */
+.scene-sunlight {
+  background:
+    linear-gradient(180deg, rgba(86, 111, 47, .13), rgba(23, 60, 37, .12));
+}
+.scene-sunlight::before {
+  opacity: .62;
+  background: rgba(216, 235, 147, .12);
+}
+.scene-sunlight::after {
+  opacity: .28;
+  background: rgba(116, 190, 92, .09);
+}
+
+/* Deep forest */
+.scene-deep {
+  background:
+    linear-gradient(180deg, rgba(5, 27, 16, .30), rgba(4, 19, 12, .36));
+}
+.scene-deep::before {
+  opacity: .52;
+  background: rgba(46, 113, 63, .11);
+}
+
+/* Moss: calm examination */
+.scene-moss {
+  background:
+    linear-gradient(180deg, rgba(37, 71, 41, .16), rgba(23, 45, 29, .18));
+}
+.scene-moss::after {
+  opacity: .45;
+  background: rgba(117, 180, 91, .10);
+}
+
+/* Breeze 2: airy interaction */
+.scene-breeze-2 {
+  background:
+    linear-gradient(180deg, rgba(53, 93, 65, .12), rgba(17, 39, 25, .10));
+}
+.scene-breeze-2::before {
+  opacity: .48;
+  background: rgba(147, 214, 161, .10);
+  transform: translateX(12px);
+}
+
+/* Dusk: final calm */
+.scene-dusk {
+  background:
+    linear-gradient(180deg, rgba(21, 39, 27, .22), rgba(11, 24, 16, .38));
+}
+.scene-dusk::before {
+  opacity: .68;
+  background: rgba(126, 162, 93, .10);
+}
+.scene-dusk::after {
+  opacity: .35;
+  background: rgba(78, 112, 67, .11);
+}
+
+.scene.active-scene::before {
+  transform: scale(1.04) translateY(-4px);
+}
+
+.scene.active-scene::after {
+  transform: scale(1.05) translateY(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body, .scene::before, .scene::after, body::after {
+    transition: none !important;
+  }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 바로가기</a>
+<header><div class="container"><nav aria-label="주요 메뉴"><a class="brand" href="#home">MY PAGE</a><ul class="nav-links"><li><a href="#scope">공개범위</a></li><li><a href="#intro">소개</a></li><li><a href="#activity">활동</a></li><li><a href="#quality">검사</a></li></ul></nav></div></header>
+<main id="main">
+<section id="home" class="hero scene scene-sprout"><div class="container"><div class="hero-grid"><div><div class="nature-badge">Nature-minded</div><div class="eyebrow">ONE PAGE · PUBLIC PROFILE</div><h1>안녕하세요.<br><span>나를 보여주는</span><br>한 페이지입니다.</h1><p class="lead">불특정 대중에게 공개할 수 있는 경험과 취향을 골라, 이력서처럼 나열하지 않고 실제 상황·행동·결과와 근거가 보이도록 구성했습니다.</p><p class="nature-note">자연을 사랑하고, 자연처럼 편안하면서도 균형 있는 경험을 만드는 것을 좋아합니다.</p><div class="actions"><a class="button primary" href="#intro">소개 보기</a><a class="button" href="#activity">활동 보기</a></div></div><div class="proof" aria-label="핵심 소개 3개"><article class="proof-card card"><div class="eyebrow">STRENGTH 01</div><h2>문제를 구조화하는 편</h2><p>복잡한 내용을 나누고 핵심부터 정리합니다.</p></article><article class="proof-card card"><div class="eyebrow">STRENGTH 02</div><h2>직접 만들어보는 편</h2><p>작은 결과물을 먼저 만들고 실제로 확인합니다.</p></article><article class="proof-card card"><div class="eyebrow">STRENGTH 03</div><h2>사용자 입장에서 보는 편</h2><p>만드는 사람보다 사용하는 사람의 흐름을 먼저 확인합니다.</p></article></div></div></div></section>
+<section id="scope" class="scene scene-forest"><div class="container"><div class="eyebrow">01 — PUBLIC SCOPE</div><h2 class="section-title">누구에게 무엇을 보여주는가</h2><p class="section-desc">대상은 불특정 대중입니다. 공개해도 안전하며 나를 설명하는 데 필요한 내용만 공개합니다.</p><div class="scope-statement"><strong>대상과 목적:</strong> 불특정 대중에게 내가 어떤 사람이고 무엇을 좋아하며 어떤 경험이 있는지 보여주되, 직접 식별 정보와 비밀값은 공개하지 않습니다.</div><div class="two-col"><div class="scope-card public"><h3>공개할 것</h3><ul><li>경험·활동과 그 과정</li><li>공개 가능한 강점·취향</li><li>개인정보를 제거한 결과물과 근거</li></ul></div><div class="scope-card private"><h3>공개하지 않을 것</h3><ul><li>주소·전화번호 등 직접 식별 정보</li><li>비밀번호·토큰·API 키·시크릿</li><li>타인의 공개 허가를 받지 않은 정보</li></ul></div></div></div></section>
+<section id="intro" class="scene scene-breeze"><div class="container"><div class="eyebrow">02 — INTRODUCTION</div><h2 class="section-title">강점과 취향 3가지</h2><p class="section-desc">각 항목은 상황·행동·결과와 공개 가능한 근거를 연결했습니다.</p><div class="experience-list">
+<article class="card"><button class="toggle" type="button" aria-expanded="false" aria-controls="detail-1"><span class="toggle-label"><span class="num">01</span><strong>문제를 구조화하는 편입니다</strong></span><span aria-hidden="true">＋</span></button><div class="content" id="detail-1" hidden><div class="three"><div class="box"><strong>상황</strong><p>정보나 해야 할 일이 많아 무엇부터 봐야 할지 모호한 상황이 있습니다.</p></div><div class="box"><strong>행동</strong><p>목적과 우선순위를 기준으로 정보를 나누고 순서를 다시 정리합니다.</p></div><div class="box"><strong>결과</strong><p>복잡한 내용을 다른 사람이 빠르게 이해할 수 있는 구조로 바꿉니다.</p></div></div><div class="evidence"><strong>공개 가능한 근거:</strong> 개인정보를 제거한 구조화 전후 문서 또는 결과 화면 1개</div></div></article>
+<article class="card"><button class="toggle" type="button" aria-expanded="false" aria-controls="detail-2"><span class="toggle-label"><span class="num">02</span><strong>새로운 것을 직접 만들어보는 편입니다</strong></span><span aria-hidden="true">＋</span></button><div class="content" id="detail-2" hidden><div class="three"><div class="box"><strong>상황</strong><p>새로운 아이디어나 익숙하지 않은 도구를 실제 결과로 확인해야 하는 상황이 있습니다.</p></div><div class="box"><strong>행동</strong><p>작은 기능부터 구현하고 직접 사용하면서 문제를 찾아 수정합니다.</p></div><div class="box"><strong>결과</strong><p>아이디어를 실제로 확인할 수 있는 결과물로 빠르게 바꿉니다.</p></div></div><div class="evidence"><strong>공개 가능한 근거:</strong> 실행 화면 또는 GitHub 저장소의 공개 결과물 1개</div></div></article>
+<article class="card"><button class="toggle" type="button" aria-expanded="false" aria-controls="detail-3"><span class="toggle-label"><span class="num">03</span><strong>사용하는 사람의 입장에서 보는 편입니다</strong></span><span aria-hidden="true">＋</span></button><div class="content" id="detail-3" hidden><div class="three"><div class="box"><strong>상황</strong><p>처음 보는 사람이 사이트를 사용하는 상황을 먼저 생각합니다.</p></div><div class="box"><strong>행동</strong><p>문장, 버튼, 키보드 이동, 화면 크기를 실제 사용 흐름으로 확인합니다.</p></div><div class="box"><strong>결과</strong><p>처음 보는 사람도 핵심 내용을 이해하고 다음 행동을 찾을 수 있게 만듭니다.</p></div></div><div class="evidence"><strong>공개 가능한 근거:</strong> 개선 전후 화면 또는 실제 검사 기록 1개</div></div></article>
+</div></div></section>
+<section id="activity" class="scene scene-sunlight"><div class="container"><div class="eyebrow">03 — ACTIVITY</div><h2 class="section-title">활동과 경험</h2><p class="section-desc">실제 경험을 나중에 교체할 수 있도록 공개 가능한 형태의 예시를 넣었습니다.</p><div class="projects"><article class="project reveal-target"><div class="eyebrow">PROJECT 01</div><h3>개인 웹사이트 제작</h3><p>HTML/CSS/JS로 한 페이지를 만들고 반응형·접근성·검수 과정을 직접 확인합니다.</p><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div></article><article class="project reveal-target"><div class="eyebrow">ACTIVITY 02</div><h3>문제 해결형 학습</h3><p>작은 결과물을 만들고 실제로 사용하면서 생기는 문제를 찾아 수정하는 학습 방식을 사용합니다.</p><div class="tags"><span class="tag">Build</span><span class="tag">Test</span><span class="tag">Improve</span></div></article></div></div></section>
+<section><div class="container"><div class="eyebrow">04 — HOW I WORK</div><h2 class="section-title">문제를 해결하는 과정</h2><p class="section-desc">문제가 생기면 발견 → 상태 확인 → 원인 분석 → 수정 및 재검증 순으로 접근합니다.</p><div class="process"><article class="project reveal-target"><h3>01. 발견</h3><p>문제가 어떤 상황에서 발생하는지 먼저 확인합니다.</p></article><article class="project reveal-target"><h3>02. 확인</h3><p>현재 상태와 관련된 요소를 순서대로 점검합니다.</p></article><article class="project reveal-target"><h3>03. 분석</h3><p>가능한 원인을 좁히고 실제 결과와 비교합니다.</p></article><article class="project reveal-target"><h3>04. 재검증</h3><p>수정 후 같은 조건에서 다시 확인합니다.</p></article></div></div></section>
+<section id="quality" class="scene scene-moss"><div class="container"><div class="eyebrow">05 — QUALITY CHECK</div><h2 class="section-title">실제 결함 검사</h2><p class="section-desc">검수표의 PASS를 미리 선언하지 않고, 실제 검사 결과를 기록합니다.</p><div class="checks"><article class="check reveal-target"><h3>두 기준 화면</h3><ul><li>1366 × 768</li><li>1920 × 1080</li><li>가로 넘침 0건</li><li>첫 화면 핵심 3개 확인</li></ul></article><article class="check reveal-target"><h3>링크·키보드·제목</h3><ul><li>모든 링크 목적지 확인</li><li>Tab 순서 확인</li><li>h1 → h2 → h3 확인</li><li>Enter / Space 확인</li></ul></article><article class="check reveal-target"><h3>명암·콘솔</h3><ul><li>일반 글자 4.5:1 이상</li><li>큰/굵은 글자 3:1 이상</li><li>브라우저 콘솔 빨간 오류 0건</li></ul></article><article class="check reveal-target"><h3>보안·공개 범위</h3><ul><li>공개 금지 정보 0건</li><li>password / token / api key / secret 검색</li><li>Git 기록까지 비밀값 확인</li></ul></article></div><div class="code-like" id="consoleStatus">검수 전 상태: 실제 브라우저 검사 후 최종 콘솔 결과를 기록하세요.
+테스트 명령: npm test
+보안 검사: npm run lint:secrets</div></div></section>
+<section><div class="container"><div class="eyebrow">06 — INTERACTION</div><h2 class="section-title">페이지 내용과 연결된 상호작용</h2><p class="section-desc">소개 항목을 펼치면 상황·행동·결과와 근거가 보입니다.</p><div class="two-col"><article class="project reveal-target"><h3>마우스</h3><p>소개 항목을 클릭하면 내용이 펼쳐집니다.</p></article><article class="project reveal-target"><h3>키보드</h3><p>Tab으로 버튼에 이동한 뒤 Enter 또는 Space로 같은 동작을 실행할 수 있습니다.</p></article></div><div class="motion"><p><strong>움직임 선택권</strong><br>화면 이동이나 전환이 불편하면 사용자가 움직임을 줄일 수 있습니다.</p><button id="motionButton" type="button" aria-pressed="false">움직임 줄이기</button></div></div></section>
+<section><div class="container"><div class="eyebrow">07 — SUBMISSION</div><h2 class="section-title">제출용 정보</h2><div class="submission-grid"><article class="submission reveal-target"><h3>결과물 주소</h3><p>GitHub Pages 공개 주소를 작성합니다.</p><p><strong>https://beedulgyya.github.io/저장소명/</strong></p></article><article class="submission reveal-target"><h3>소스 주소</h3><p>GitHub 저장소 주소를 작성합니다.</p><p><strong>https://github.com/beedulgyya/저장소명</strong></p></article><article class="submission reveal-target"><h3>짧은 확인 방법 4줄</h3><ol><li><strong>위치:</strong> 공개 GitHub Pages 주소의 메인 화면</li><li><strong>3단계 이내 행동:</strong> 새 시크릿 창 → 주소 접속 → 소개 항목 선택</li><li><strong>통과 모습:</strong> 소개·활동·근거가 보이고 소개 항목이 마우스/키보드로 펼쳐짐</li><li><strong>안 될 때 모습:</strong> 404, 가로 넘침, 포커스 없음, Enter/Space가 동작하지 않음</li></ol></article><article class="submission reveal-target"><h3>AI와 나의 판단 3줄</h3><ul><li><strong>AI에게 맡긴 일:</strong> HTML 구조 초안, 반복적인 검사와 개선안 제안</li><li><strong>직접 판단한 일:</strong> 공개 범위, 실제 경험·취향, 공개 근거와 최종 배포</li><li><strong>AI 제안을 따르지 않은 일:</strong> AI가 main에 직접 수정·배포하는 방식은 공개 정보 통제와 검수 문제 때문에 사용하지 않음</li></ul></article></div></div></section>
+</main>
+<footer><div class="container"><p>공개 범위를 먼저 정하고, 실제 검사 후 공개하는 개인 사이트</p></div></footer>
+
+
+<script>
+document.querySelectorAll(".toggle").forEach((button) => {
+  button.addEventListener("click", () => {
+    const panel = document.getElementById(button.getAttribute("aria-controls"));
+    const open = button.getAttribute("aria-expanded") === "true";
+    button.setAttribute("aria-expanded", String(!open));
+    panel.hidden = open;
+    button.lastElementChild.textContent = open ? "＋" : "−";
+  });
+});
+
+const motionButton = document.getElementById("motionButton");
+motionButton.addEventListener("click", () => {
+  const reduced = document.body.classList.toggle("reduce-motion");
+  motionButton.setAttribute("aria-pressed", String(reduced));
+  motionButton.textContent = reduced ? "움직임 다시 켜기" : "움직임 줄이기";
+});
+
+const revealTargets = document.querySelectorAll(".reveal-target");
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("reveal-in");
+      obs.unobserve(entry.target);
+    });
+  }, { threshold: 0.12 });
+  revealTargets.forEach((el) => observer.observe(el));
+} else {
+  revealTargets.forEach((el) => el.classList.add("reveal-in"));
+}
+
+const scenes = document.querySelectorAll(".scene");
+let sceneTicking = false;
+
+function updateScene() {
+  if (!scenes.length) return;
+
+  const viewportCenter = window.innerHeight * 0.45;
+  let best = null;
+  let bestDistance = Infinity;
+
+  scenes.forEach((scene) => {
+    const rect = scene.getBoundingClientRect();
+    const center = rect.top + rect.height / 2;
+    const distance = Math.abs(center - viewportCenter);
+    if (distance < bestDistance) {
+      bestDistance = distance;
+      best = scene;
+    }
+  });
+
+  scenes.forEach((scene) => scene.classList.toggle("active-scene", scene === best));
+
+  const max = Math.max(document.body.scrollHeight - window.innerHeight, 1);
+  const progress = Math.min(Math.max(window.scrollY / max, 0), 1);
+  document.documentElement.style.setProperty("--scroll-shift", `${progress * 28}px`);
+
+  sceneTicking = false;
+}
+
+window.addEventListener("scroll", () => {
+  if (sceneTicking) return;
+  sceneTicking = true;
+  requestAnimationFrame(updateScene);
+}, { passive: true });
+
+window.addEventListener("resize", updateScene);
+updateScene();
+</script>
+</body></html>
+width=device-width, initial-scale=1">
 <meta name="description" content="불특정 대중에게 공개하는 개인 한 페이지">
 <title>나를 보여주는 한 페이지</title>
 <style>
