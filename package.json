@@ -1,0 +1,11 @@
+{
+  "name": "beedulgyya-personal-site",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "lint:secrets": "node tests/secret-scan.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
+  }
+}
